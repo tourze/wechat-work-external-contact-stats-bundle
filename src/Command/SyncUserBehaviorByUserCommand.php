@@ -13,9 +13,9 @@ use Tourze\WechatWorkContracts\UserLoaderInterface;
 use WechatWorkBundle\Repository\AgentRepository;
 use WechatWorkBundle\Service\WorkService;
 use WechatWorkExternalContactBundle\Request\GetFollowUserListRequest;
-use WechatWorkExternalContactBundle\Request\GetUserBehaviorDataRequest;
 use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByUser;
 use WechatWorkExternalContactStatsBundle\Repository\UserBehaviorDataByUserRepository;
+use WechatWorkExternalContactStatsBundle\Request\GetUserBehaviorDataRequest;
 
 #[AsCronTask('14 6 * * *')]
 #[AsCommand(name: 'wechat-work:SyncUserBehaviorByUserCommand', description: '获取「联系客户统计」数据-单用户的数据')]
