@@ -115,8 +115,6 @@ class GetUserBehaviorDataRequestTest extends TestCase
         $request->setUserIds($userIds);
         
         $options = $request->getRequestOptions();
-        
-        $this->assertIsArray($options);
         $this->assertArrayHasKey('json', $options);
         $this->assertArrayHasKey('start_time', $options['json']);
         $this->assertArrayHasKey('end_time', $options['json']);
@@ -141,8 +139,6 @@ class GetUserBehaviorDataRequestTest extends TestCase
         $request->setPartyIds($partyIds);
         
         $options = $request->getRequestOptions();
-        
-        $this->assertIsArray($options);
         $this->assertArrayHasKey('json', $options);
         $this->assertArrayHasKey('start_time', $options['json']);
         $this->assertArrayHasKey('end_time', $options['json']);

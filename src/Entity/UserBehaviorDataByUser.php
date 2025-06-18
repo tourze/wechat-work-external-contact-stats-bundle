@@ -6,16 +6,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Tourze\DoctrineTimestampBundle\Traits\TimestampableAware;
 use Tourze\EasyAdmin\Attribute\Action\Exportable;
-use Tourze\EasyAdmin\Attribute\Column\ExportColumn;
-use Tourze\EasyAdmin\Attribute\Column\ListColumn;
-use Tourze\EasyAdmin\Attribute\Permission\AsPermission;
 use Tourze\WechatWorkContracts\UserInterface;
 use WechatWorkExternalContactStatsBundle\Repository\UserBehaviorDataByUserRepository;
 
 /**
  * @see https://developer.work.weixin.qq.com/document/path/92132
  */
-#[AsPermission(title: '联系客户统计数据x单用户')]
 #[Exportable]
 #[ORM\Entity(repositoryClass: UserBehaviorDataByUserRepository::class)]
 #[ORM\Table(name: 'wechat_work_behavior_data_by_user', options: ['comment' => '联系客户统计数据x单用户'])]
@@ -24,8 +20,6 @@ class UserBehaviorDataByUser
     use TimestampableAware;
     use BehaviorDataTrait;
 
-    #[ListColumn(order: -1)]
-    #[ExportColumn]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER, options: ['comment' => 'ID'])]
