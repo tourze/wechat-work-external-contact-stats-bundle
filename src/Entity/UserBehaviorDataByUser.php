@@ -15,7 +15,7 @@ use WechatWorkExternalContactStatsBundle\Repository\UserBehaviorDataByUserReposi
 #[Exportable]
 #[ORM\Entity(repositoryClass: UserBehaviorDataByUserRepository::class)]
 #[ORM\Table(name: 'wechat_work_behavior_data_by_user', options: ['comment' => '联系客户统计数据x单用户'])]
-class UserBehaviorDataByUser
+class UserBehaviorDataByUser implements \Stringable
 {
     use TimestampableAware;
     use BehaviorDataTrait;
@@ -44,4 +44,9 @@ class UserBehaviorDataByUser
         $this->user = $user;
 
         return $this;
-    }}
+    }
+    public function __toString(): string
+    {
+        return (string) $this->getId();
+    }
+}

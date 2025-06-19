@@ -21,6 +21,8 @@ use WechatWorkExternalContactStatsBundle\Request\GetUserBehaviorDataRequest;
 #[AsCommand(name: 'wechat-work:SyncUserBehaviorByUserCommand', description: '获取「联系客户统计」数据-单用户的数据')]
 class SyncUserBehaviorByUserCommand extends Command
 {
+    public const NAME = 'sync-user-behavior-by-user';
+
     public function __construct(
         private readonly AgentRepository $agentRepository,
         private readonly WorkService $workService,
