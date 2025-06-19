@@ -2,7 +2,7 @@
 
 namespace WechatWorkExternalContactStatsBundle\Command;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,10 +18,10 @@ use WechatWorkExternalContactStatsBundle\Repository\UserBehaviorDataByUserReposi
 use WechatWorkExternalContactStatsBundle\Request\GetUserBehaviorDataRequest;
 
 #[AsCronTask('14 6 * * *')]
-#[AsCommand(name: 'wechat-work:SyncUserBehaviorByUserCommand', description: '获取「联系客户统计」数据-单用户的数据')]
+#[AsCommand(name: self::NAME, description: '获取「联系客户统计」数据-单用户的数据')]
 class SyncUserBehaviorByUserCommand extends Command
 {
-    public const NAME = 'sync-user-behavior-by-user';
+    public const NAME = 'wechat-work:sync-user-behavior-by-user';
 
     public function __construct(
         private readonly AgentRepository $agentRepository,
@@ -35,8 +35,8 @@ class SyncUserBehaviorByUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $endTime = Carbon::today();
-        $startTime = $endTime->clone()->subWeek();
+        $endTime = CarbonImmutable::today();
+        $startTime = $endTime->subWeek();
 
         foreach ($this->agentRepository->findAll() as $agent) {
             $userListRequest = new GetFollowUserListRequest();
@@ -48,7 +48,7 @@ class SyncUserBehaviorByUserCommand extends Command
 
             foreach ($userListResponse['follow_user'] as $userId) {
                 $user = $this->userLoader->loadUserByUserIdAndCorp($userId, $agent->getCorp());
-                if (!$user) {
+                if ($user === null) {
                     continue;
                 }
 
@@ -59,12 +59,12 @@ class SyncUserBehaviorByUserCommand extends Command
                 $request->setEndTime($endTime);
                 $response = $this->workService->request($request);
                 foreach ($response['behavior_data'] as $datum) {
-                    $date = Carbon::createFromTimestamp($datum['stat_time'], date_default_timezone_get())->startOfDay();
+                    $date = CarbonImmutable::createFromTimestamp($datum['stat_time'], date_default_timezone_get())->startOfDay();
                     $data = $this->dataByUserRepository->findOneBy([
                         'date' => $date,
                         'user' => $user,
                     ]);
-                    if (!$data) {
+                    if ($data === null) {
                         $data = new UserBehaviorDataByUser();
                         $data->setDate($date);
                         $data->setUser($user);

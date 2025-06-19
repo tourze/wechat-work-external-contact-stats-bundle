@@ -66,7 +66,7 @@ class UserBehaviorDataByPartyTest extends TestCase
 
     public function test_setCreateTime_withValidDateTime_setsTimeCorrectly(): void
     {
-        $createTime = new \DateTime('2024-01-01 08:00:00');
+        $createTime = new \DateTimeImmutable('2024-01-01 08:00:00');
         
         $this->behaviorData->setCreateTime($createTime);
         
@@ -75,7 +75,7 @@ class UserBehaviorDataByPartyTest extends TestCase
 
     public function test_setCreateTime_withNull_setsNull(): void
     {
-        $this->behaviorData->setCreateTime(new \DateTime());
+        $this->behaviorData->setCreateTime(new \DateTimeImmutable());
         
         $this->behaviorData->setCreateTime(null);
         
@@ -84,7 +84,7 @@ class UserBehaviorDataByPartyTest extends TestCase
 
     public function test_setUpdateTime_withValidDateTime_setsTimeCorrectly(): void
     {
-        $updateTime = new \DateTime('2024-01-30 18:30:00');
+        $updateTime = new \DateTimeImmutable('2024-01-30 18:30:00');
         
         $this->behaviorData->setUpdateTime($updateTime);
         
@@ -93,7 +93,7 @@ class UserBehaviorDataByPartyTest extends TestCase
 
     public function test_setUpdateTime_withNull_setsNull(): void
     {
-        $this->behaviorData->setUpdateTime(new \DateTime());
+        $this->behaviorData->setUpdateTime(new \DateTimeImmutable());
         
         $this->behaviorData->setUpdateTime(null);
         
@@ -105,7 +105,7 @@ class UserBehaviorDataByPartyTest extends TestCase
      */
     public function test_setDate_withValidDateTime_setsTimeCorrectly(): void
     {
-        $date = new \DateTime('2024-01-15 00:00:00');
+        $date = new \DateTimeImmutable('2024-01-15 00:00:00');
         
         $result = $this->behaviorData->setDate($date);
         
@@ -191,9 +191,9 @@ class UserBehaviorDataByPartyTest extends TestCase
         /** @var DepartmentInterface&MockObject $department */
         $department = $this->createMock(DepartmentInterface::class);
         
-        $date = new \DateTime('2024-01-15 00:00:00');
-        $createTime = new \DateTime('2024-01-01 08:00:00');
-        $updateTime = new \DateTime('2024-01-30 18:00:00');
+        $date = new \DateTimeImmutable('2024-01-15 00:00:00');
+        $createTime = new \DateTimeImmutable('2024-01-01 08:00:00');
+        $updateTime = new \DateTimeImmutable('2024-01-30 18:00:00');
         
         $result = $this->behaviorData
             ->setParty($department)
@@ -255,7 +255,7 @@ class UserBehaviorDataByPartyTest extends TestCase
     public function test_edgeCases_dateTimeTypes(): void
     {
         // 测试DateTime
-        $dateTime = new \DateTime('2024-01-15 12:30:45');
+        $dateTime = new \DateTimeImmutable('2024-01-15 12:30:45');
         $this->behaviorData->setDate($dateTime);
         $this->assertSame($dateTime, $this->behaviorData->getDate());
         
@@ -273,8 +273,8 @@ class UserBehaviorDataByPartyTest extends TestCase
         /** @var DepartmentInterface&MockObject $salesDept */
         $salesDept = $this->createMock(DepartmentInterface::class);
         
-        $date = new \DateTime('2024-01-15 00:00:00');
-        $createTime = new \DateTime('2024-01-16 08:00:00');
+        $date = new \DateTimeImmutable('2024-01-15 00:00:00');
+        $createTime = new \DateTimeImmutable('2024-01-16 08:00:00');
         
         // 模拟销售部门的日统计数据
         $this->behaviorData
@@ -310,7 +310,7 @@ class UserBehaviorDataByPartyTest extends TestCase
         /** @var DepartmentInterface&MockObject $marketingDept */
         $marketingDept = $this->createMock(DepartmentInterface::class);
         
-        $date = new \DateTime('2024-01-08 00:00:00'); // 周一
+        $date = new \DateTimeImmutable('2024-01-08 00:00:00'); // 周一
         
         // 模拟市场部门的周统计数据
         $this->behaviorData
@@ -339,7 +339,7 @@ class UserBehaviorDataByPartyTest extends TestCase
         // 模拟表现完美的技术部门
         $this->behaviorData
             ->setParty($techDept)
-            ->setDate(new \DateTime('2024-01-15'))
+            ->setDate(new \DateTimeImmutable('2024-01-15'))
             ->setNewApplyCount(20)
             ->setNewContactCount(800)
             ->setChatCount(100)
@@ -364,7 +364,7 @@ class UserBehaviorDataByPartyTest extends TestCase
         // 模拟有问题的部门
         $this->behaviorData
             ->setParty($dept)
-            ->setDate(new \DateTime('2024-01-15'))
+            ->setDate(new \DateTimeImmutable('2024-01-15'))
             ->setNewApplyCount(5)         // 新增申请人数很少
             ->setNewContactCount(200)     // 总量下降
             ->setChatCount(10)            // 新增聊天次数较少
@@ -387,13 +387,13 @@ class UserBehaviorDataByPartyTest extends TestCase
         /** @var DepartmentInterface&MockObject $dept */
         $dept = $this->createMock(DepartmentInterface::class);
         
-        $createTime = new \DateTime('2024-02-01 08:00:00');
-        $updateTime = new \DateTime('2024-02-01 18:00:00');
+        $createTime = new \DateTimeImmutable('2024-02-01 08:00:00');
+        $updateTime = new \DateTimeImmutable('2024-02-01 18:00:00');
         
         // 模拟月度趋势分析数据
         $this->behaviorData
             ->setParty($dept)
-            ->setDate(new \DateTime('2024-01-01')) // 1月份数据
+            ->setDate(new \DateTimeImmutable('2024-01-01')) // 1月份数据
             ->setNewApplyCount(300)
             ->setNewContactCount(5000)
             ->setChatCount(100)
@@ -448,6 +448,8 @@ class UserBehaviorDataByPartyTest extends TestCase
     {
         // setDate 不接受 null，会抛出类型错误
         $this->expectException(\TypeError::class);
-        $this->behaviorData->setDate(/** @phpstan-ignore-next-line */ null);
+        /** @var \DateTimeInterface $nullValue */
+        $nullValue = null;
+        $this->behaviorData->setDate($nullValue);
     }
 } 

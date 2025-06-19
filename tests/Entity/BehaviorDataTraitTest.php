@@ -24,7 +24,7 @@ class BehaviorDataTraitTest extends TestCase
 
     public function test_setDate_withValidDate_setsDateCorrectly(): void
     {
-        $date = new \DateTime('2024-01-15');
+        $date = new \DateTimeImmutable('2024-01-15');
 
         $result = $this->traitObject->setDate($date);
 
@@ -265,7 +265,7 @@ class BehaviorDataTraitTest extends TestCase
      */
     public function test_chainedSetters_returnSameInstance(): void
     {
-        $date = new \DateTime('2024-01-01');
+        $date = new \DateTimeImmutable('2024-01-01');
         
         $result = $this->traitObject
             ->setDate($date)
@@ -320,7 +320,7 @@ class BehaviorDataTraitTest extends TestCase
     public function test_setDate_withDifferentDateTimeImplementations(): void
     {
         // 测试DateTime
-        $dateTime = new \DateTime('2024-01-15 12:30:45');
+        $dateTime = new \DateTimeImmutable('2024-01-15 12:30:45');
         $this->traitObject->setDate($dateTime);
         $this->assertSame($dateTime, $this->traitObject->getDate());
         

@@ -2,7 +2,7 @@
 
 namespace WechatWorkExternalContactStatsBundle\Tests\Command;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -211,7 +211,7 @@ class SyncUserBehaviorByUserCommandTest extends TestCase
         $user->method('getUserId')->willReturn('user123');
 
         $existingData = new UserBehaviorDataByUser();
-        $existingData->setDate(Carbon::createFromTimestamp(1640995200)->startOfDay());
+        $existingData->setDate(CarbonImmutable::createFromTimestamp(1640995200)->startOfDay());
 
         $behaviorResponse = [
             'behavior_data' => [
@@ -410,7 +410,7 @@ class SyncUserBehaviorByUserCommandTest extends TestCase
     public function testTimeRangeCalculation(): void
     {
         // 测试时间范围计算逻辑
-        Carbon::setTestNow(Carbon::create(2022, 1, 8, 10, 0, 0)); // 设置测试时间为2022-01-08 10:00:00
+        CarbonImmutable::setTestNow(CarbonImmutable::create(2022, 1, 8, 10, 0, 0)); // 设置测试时间为2022-01-08 10:00:00
 
         $corp = new Corp();
         $agent = new Agent();
@@ -458,13 +458,13 @@ class SyncUserBehaviorByUserCommandTest extends TestCase
         $this->assertEquals(0, $result);
 
         // 重置测试时间
-        Carbon::setTestNow();
+        CarbonImmutable::setTestNow();
     }
 
     public function testCommandMetadata(): void
     {
         // 验证命令名称
-        $this->assertEquals('wechat-work:SyncUserBehaviorByUserCommand', $this->command->getName());
+        $this->assertEquals('wechat-work:sync-user-behavior-by-user', $this->command->getName());
         
         // 验证命令描述
         $this->assertEquals('获取「联系客户统计」数据-单用户的数据', $this->command->getDescription());

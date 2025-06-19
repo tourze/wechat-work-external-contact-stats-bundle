@@ -66,7 +66,7 @@ class UserBehaviorDataByUserTest extends TestCase
 
     public function test_setCreateTime_withValidDateTime_setsTimeCorrectly(): void
     {
-        $createTime = new \DateTime('2024-01-01 08:00:00');
+        $createTime = new \DateTimeImmutable('2024-01-01 08:00:00');
         
         $this->behaviorData->setCreateTime($createTime);
         
@@ -75,7 +75,7 @@ class UserBehaviorDataByUserTest extends TestCase
 
     public function test_setCreateTime_withNull_setsNull(): void
     {
-        $this->behaviorData->setCreateTime(new \DateTime());
+        $this->behaviorData->setCreateTime(new \DateTimeImmutable());
         
         $this->behaviorData->setCreateTime(null);
         
@@ -84,7 +84,7 @@ class UserBehaviorDataByUserTest extends TestCase
 
     public function test_setUpdateTime_withValidDateTime_setsTimeCorrectly(): void
     {
-        $updateTime = new \DateTime('2024-01-30 18:30:00');
+        $updateTime = new \DateTimeImmutable('2024-01-30 18:30:00');
         
         $this->behaviorData->setUpdateTime($updateTime);
         
@@ -93,7 +93,7 @@ class UserBehaviorDataByUserTest extends TestCase
 
     public function test_setUpdateTime_withNull_setsNull(): void
     {
-        $this->behaviorData->setUpdateTime(new \DateTime());
+        $this->behaviorData->setUpdateTime(new \DateTimeImmutable());
         
         $this->behaviorData->setUpdateTime(null);
         
@@ -105,7 +105,7 @@ class UserBehaviorDataByUserTest extends TestCase
      */
     public function test_setDate_withValidDateTime_setsTimeCorrectly(): void
     {
-        $date = new \DateTime('2024-01-15 00:00:00');
+        $date = new \DateTimeImmutable('2024-01-15 00:00:00');
         
         $result = $this->behaviorData->setDate($date);
         
@@ -191,9 +191,9 @@ class UserBehaviorDataByUserTest extends TestCase
         /** @var UserInterface&MockObject $user */
         $user = $this->createMock(UserInterface::class);
         
-        $date = new \DateTime('2024-01-15 00:00:00');
-        $createTime = new \DateTime('2024-01-01 08:00:00');
-        $updateTime = new \DateTime('2024-01-30 18:00:00');
+        $date = new \DateTimeImmutable('2024-01-15 00:00:00');
+        $createTime = new \DateTimeImmutable('2024-01-01 08:00:00');
+        $updateTime = new \DateTimeImmutable('2024-01-30 18:00:00');
         
         $result = $this->behaviorData
             ->setUser($user)
@@ -255,7 +255,7 @@ class UserBehaviorDataByUserTest extends TestCase
     public function test_edgeCases_dateTimeTypes(): void
     {
         // 测试DateTime
-        $dateTime = new \DateTime('2024-01-15 12:30:45');
+        $dateTime = new \DateTimeImmutable('2024-01-15 12:30:45');
         $this->behaviorData->setDate($dateTime);
         $this->assertSame($dateTime, $this->behaviorData->getDate());
         
@@ -273,8 +273,8 @@ class UserBehaviorDataByUserTest extends TestCase
         /** @var UserInterface&MockObject $salesPerson */
         $salesPerson = $this->createMock(UserInterface::class);
         
-        $date = new \DateTime('2024-01-15 00:00:00');
-        $createTime = new \DateTime('2024-01-16 08:00:00');
+        $date = new \DateTimeImmutable('2024-01-15 00:00:00');
+        $createTime = new \DateTimeImmutable('2024-01-16 08:00:00');
         
         // 模拟销售人员的日统计数据
         $this->behaviorData
@@ -310,7 +310,7 @@ class UserBehaviorDataByUserTest extends TestCase
         /** @var UserInterface&MockObject $serviceUser */
         $serviceUser = $this->createMock(UserInterface::class);
         
-        $date = new \DateTime('2024-01-08 00:00:00'); // 周一
+        $date = new \DateTimeImmutable('2024-01-08 00:00:00'); // 周一
         
         // 模拟客服人员的周统计数据
         $this->behaviorData
@@ -340,7 +340,7 @@ class UserBehaviorDataByUserTest extends TestCase
         // 模拟顶级表现用户
         $this->behaviorData
             ->setUser($topUser)
-            ->setDate(new \DateTime('2024-01-15'))
+            ->setDate(new \DateTimeImmutable('2024-01-15'))
             ->setNewApplyCount(30)
             ->setNewContactCount(28)    // 高成功率
             ->setChatCount(150)
@@ -364,7 +364,7 @@ class UserBehaviorDataByUserTest extends TestCase
         // 模拟表现不佳的用户
         $this->behaviorData
             ->setUser($strugglingUser)
-            ->setDate(new \DateTime('2024-01-15'))
+            ->setDate(new \DateTimeImmutable('2024-01-15'))
             ->setNewApplyCount(20)      // 发起申请较多
             ->setNewContactCount(5)     // 但成功率很低
             ->setChatCount(10)          // 聊天很少
@@ -385,13 +385,13 @@ class UserBehaviorDataByUserTest extends TestCase
         /** @var UserInterface&MockObject $user */
         $user = $this->createMock(UserInterface::class);
         
-        $createTime = new \DateTime('2024-02-01 08:00:00');
-        $updateTime = new \DateTime('2024-02-01 18:00:00');
+        $createTime = new \DateTimeImmutable('2024-02-01 08:00:00');
+        $updateTime = new \DateTimeImmutable('2024-02-01 18:00:00');
         
         // 模拟月度用户分析数据
         $this->behaviorData
             ->setUser($user)
-            ->setDate(new \DateTime('2024-01-01')) // 1月份数据
+            ->setDate(new \DateTimeImmutable('2024-01-01')) // 1月份数据
             ->setNewApplyCount(120)
             ->setNewContactCount(100)
             ->setChatCount(500)
@@ -423,7 +423,7 @@ class UserBehaviorDataByUserTest extends TestCase
         // 模拟新员工的数据
         $this->behaviorData
             ->setUser($newEmployee)
-            ->setDate(new \DateTime('2024-01-15'))
+            ->setDate(new \DateTimeImmutable('2024-01-15'))
             ->setNewApplyCount(5)       // 谨慎发起申请
             ->setNewContactCount(4)     // 成功率较高
             ->setChatCount(15)          // 聊天次数适中
@@ -447,7 +447,7 @@ class UserBehaviorDataByUserTest extends TestCase
         // 模拟资深员工的数据
         $this->behaviorData
             ->setUser($veteran)
-            ->setDate(new \DateTime('2024-01-15'))
+            ->setDate(new \DateTimeImmutable('2024-01-15'))
             ->setNewApplyCount(40)      // 积极发起申请
             ->setNewContactCount(35)    // 高成功率
             ->setChatCount(200)         // 大量聊天

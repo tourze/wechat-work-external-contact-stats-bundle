@@ -2,7 +2,7 @@
 
 namespace WechatWorkExternalContactStatsBundle\Tests\Request;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use HttpClientBundle\Request\ApiRequest;
 use PHPUnit\Framework\TestCase;
@@ -46,7 +46,7 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试开始时间设置和获取
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::now()->subDays(7);
+        $startTime = CarbonImmutable::now()->subDays(7);
         
         $request->setStartTime($startTime);
         $this->assertSame($startTime, $request->getStartTime());
@@ -56,7 +56,7 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试结束时间设置和获取
         $request = new GetUserBehaviorDataRequest();
-        $endTime = Carbon::now();
+        $endTime = CarbonImmutable::now();
         
         $request->setEndTime($endTime);
         $this->assertSame($endTime, $request->getEndTime());
@@ -106,8 +106,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试带用户ID的请求选项
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::create(2023, 1, 1, 0, 0, 0);
-        $endTime = Carbon::create(2023, 1, 7, 23, 59, 59);
+        $startTime = CarbonImmutable::create(2023, 1, 1, 0, 0, 0);
+        $endTime = CarbonImmutable::create(2023, 1, 7, 23, 59, 59);
         $userIds = ['user1', 'user2'];
         
         $request->setStartTime($startTime);
@@ -130,8 +130,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试带部门ID的请求选项
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::create(2023, 1, 1);
-        $endTime = Carbon::create(2023, 1, 7);
+        $startTime = CarbonImmutable::create(2023, 1, 1);
+        $endTime = CarbonImmutable::create(2023, 1, 7);
         $partyIds = [1, 2, 3];
         
         $request->setStartTime($startTime);
@@ -152,8 +152,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试同时包含用户ID和部门ID
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::create(2023, 1, 1);
-        $endTime = Carbon::create(2023, 1, 7);
+        $startTime = CarbonImmutable::create(2023, 1, 1);
+        $endTime = CarbonImmutable::create(2023, 1, 7);
         $userIds = ['user1'];
         $partyIds = [1];
         
@@ -174,8 +174,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试当用户ID和部门ID都为空时抛出异常
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::create(2023, 1, 1);
-        $endTime = Carbon::create(2023, 1, 7);
+        $startTime = CarbonImmutable::create(2023, 1, 1);
+        $endTime = CarbonImmutable::create(2023, 1, 7);
         
         $request->setStartTime($startTime);
         $request->setEndTime($endTime);
@@ -191,8 +191,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试用户ID为空但部门ID不为空
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::create(2023, 1, 1);
-        $endTime = Carbon::create(2023, 1, 7);
+        $startTime = CarbonImmutable::create(2023, 1, 1);
+        $endTime = CarbonImmutable::create(2023, 1, 7);
         $partyIds = [1];
         
         $request->setStartTime($startTime);
@@ -210,8 +210,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试部门ID为空但用户ID不为空
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::create(2023, 1, 1);
-        $endTime = Carbon::create(2023, 1, 7);
+        $startTime = CarbonImmutable::create(2023, 1, 1);
+        $endTime = CarbonImmutable::create(2023, 1, 7);
         $userIds = ['user1'];
         
         $request->setStartTime($startTime);
@@ -229,8 +229,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试时间戳转换
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::create(2023, 6, 15, 10, 30, 45);
-        $endTime = Carbon::create(2023, 6, 16, 15, 45, 30);
+        $startTime = CarbonImmutable::create(2023, 6, 15, 10, 30, 45);
+        $endTime = CarbonImmutable::create(2023, 6, 16, 15, 45, 30);
         
         $request->setStartTime($startTime);
         $request->setEndTime($endTime);
@@ -247,8 +247,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
         // 测试CarbonInterface兼容性
         $request = new GetUserBehaviorDataRequest();
         
-        $startTime = Carbon::now()->subWeek();
-        $endTime = Carbon::now();
+        $startTime = CarbonImmutable::now()->subWeek();
+        $endTime = CarbonImmutable::now();
         
         $request->setStartTime($startTime);
         $request->setEndTime($endTime);
@@ -286,8 +286,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试业务场景：周报数据
         $request = new GetUserBehaviorDataRequest();
-        $startOfWeek = Carbon::now()->startOfWeek();
-        $endOfWeek = Carbon::now()->endOfWeek();
+        $startOfWeek = CarbonImmutable::now()->startOfWeek();
+        $endOfWeek = CarbonImmutable::now()->endOfWeek();
         $salesTeam = ['sales1', 'sales2', 'sales3'];
         
         $request->setStartTime($startOfWeek);
@@ -306,8 +306,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试业务场景：部门月报
         $request = new GetUserBehaviorDataRequest();
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
+        $startOfMonth = CarbonImmutable::now()->startOfMonth();
+        $endOfMonth = CarbonImmutable::now()->endOfMonth();
         $departments = [1, 2, 5, 10]; // 销售部、市场部、客服部、产品部
         
         $request->setStartTime($startOfMonth);
@@ -324,8 +324,8 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试业务场景：跨部门分析（同时包含特定用户和部门）
         $request = new GetUserBehaviorDataRequest();
-        $startTime = Carbon::now()->subMonth();
-        $endTime = Carbon::now();
+        $startTime = CarbonImmutable::now()->subMonth();
+        $endTime = CarbonImmutable::now();
         $keyUsers = ['manager1', 'director1'];
         $targetDepts = [1, 3];
         
