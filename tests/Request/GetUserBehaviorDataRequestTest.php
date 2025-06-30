@@ -6,6 +6,7 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use HttpClientBundle\Request\ApiRequest;
 use PHPUnit\Framework\TestCase;
+use Tourze\WechatWorkContracts\AgentInterface;
 use WechatWorkExternalContactStatsBundle\Request\GetUserBehaviorDataRequest;
 
 /**
@@ -24,8 +25,9 @@ class GetUserBehaviorDataRequestTest extends TestCase
     {
         // 测试使用AgentAware trait
         $request = new GetUserBehaviorDataRequest();
-        $this->assertTrue(method_exists($request, 'getAgent'));
-        $this->assertTrue(method_exists($request, 'setAgent'));
+        $agent = $this->createMock(AgentInterface::class);
+        $request->setAgent($agent);
+        $this->assertSame($agent, $request->getAgent());
     }
 
     public function test_getRequestPath(): void

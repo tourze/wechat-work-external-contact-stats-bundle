@@ -5,6 +5,7 @@ namespace WechatWorkExternalContactStatsBundle\Request;
 use Carbon\CarbonInterface;
 use HttpClientBundle\Request\ApiRequest;
 use WechatWorkBundle\Request\AgentAware;
+use WechatWorkExternalContactStatsBundle\Exception\InvalidParameterException;
 
 /**
  * 获取「联系客户统计」数据
@@ -54,7 +55,7 @@ class GetUserBehaviorDataRequest extends ApiRequest
         }
 
         if (!isset($json['userid']) && !isset($json['partyid'])) {
-            throw new \RuntimeException('userid和partyid不可同时为空');
+            throw new InvalidParameterException('userid和partyid不可同时为空');
         }
 
         return [

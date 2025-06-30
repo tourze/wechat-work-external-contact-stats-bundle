@@ -17,7 +17,7 @@ use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByUser;
 use WechatWorkExternalContactStatsBundle\Repository\UserBehaviorDataByUserRepository;
 use WechatWorkExternalContactStatsBundle\Request\GetUserBehaviorDataRequest;
 
-#[AsCronTask('14 6 * * *')]
+#[AsCronTask(expression: '14 6 * * *')]
 #[AsCommand(name: self::NAME, description: '获取「联系客户统计」数据-单用户的数据')]
 class SyncUserBehaviorByUserCommand extends Command
 {

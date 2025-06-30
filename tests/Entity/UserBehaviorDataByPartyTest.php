@@ -9,7 +9,7 @@ use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByParty;
 
 /**
  * UserBehaviorDataByParty 实体测试用例
- * 
+ *
  * 测试按部门统计的联系客户行为数据实体的所有功能
  */
 class UserBehaviorDataByPartyTest extends TestCase
@@ -448,7 +448,7 @@ class UserBehaviorDataByPartyTest extends TestCase
     {
         // setDate 不接受 null，会抛出类型错误
         $this->expectException(\TypeError::class);
-        /** @var \DateTimeInterface $nullValue */
+        /** @var \DateTimeInterface|null $nullValue */
         $nullValue = null;
         $this->behaviorData->setDate($nullValue);
     }
