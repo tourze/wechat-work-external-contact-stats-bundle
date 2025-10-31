@@ -8,3 +8,8 @@ services:
     resource: '../../Command/'
   WechatWorkExternalContactStatsBundle\Repository\:
     resource: '../../Repository/'
+  WechatWorkExternalContactStatsBundle\Controller\:
+    resource: '../../Controller/'
+    tags: ['controller.service_arguments']
+  WechatWorkExternalContactStatsBundle\Service\:
+    resource: '../../Service/'

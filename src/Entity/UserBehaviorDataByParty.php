@@ -18,16 +18,22 @@ class UserBehaviorDataByParty implements \Stringable
     use TimestampableAware;
     use BehaviorDataTrait;
 
+    /**
+     * @var int 主键ID
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER, options: ['comment' => 'ID'])]
-    private ?int $id = 0;
+    private int $id = 0;
 
+    /**
+     * @var DepartmentInterface|null 部门
+     */
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?DepartmentInterface $party = null;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -37,12 +43,11 @@ class UserBehaviorDataByParty implements \Stringable
         return $this->party;
     }
 
-    public function setParty(?DepartmentInterface $party): static
+    public function setParty(?DepartmentInterface $party): void
     {
         $this->party = $party;
-
-        return $this;
     }
+
     public function __toString(): string
     {
         return (string) $this->getId();

@@ -27,12 +27,12 @@ class GetUserBehaviorDataRequest extends ApiRequest
     private CarbonInterface $endTime;
 
     /**
-     * @var array 成员ID列表，最多100个
+     * @var string[] 成员ID列表，最多100个
      */
     private array $userIds = [];
 
     /**
-     * @var array 部门ID列表，最多100个
+     * @var int[] 部门ID列表，最多100个
      */
     private array $partyIds = [];
 
@@ -47,10 +47,10 @@ class GetUserBehaviorDataRequest extends ApiRequest
             'start_time' => $this->getStartTime()->getTimestamp(),
             'end_time' => $this->getEndTime()->getTimestamp(),
         ];
-        if (!empty($this->getUserIds())) {
+        if ([] !== $this->getUserIds()) {
             $json['userid'] = $this->getUserIds();
         }
-        if (!empty($this->getPartyIds())) {
+        if ([] !== $this->getPartyIds()) {
             $json['partyid'] = $this->getPartyIds();
         }
 
@@ -88,21 +88,33 @@ class GetUserBehaviorDataRequest extends ApiRequest
         $this->endTime = $endTime;
     }
 
+    /**
+     * @return string[]
+     */
     public function getUserIds(): array
     {
         return $this->userIds;
     }
 
+    /**
+     * @param string[] $userIds
+     */
     public function setUserIds(array $userIds): void
     {
         $this->userIds = $userIds;
     }
 
+    /**
+     * @return int[]
+     */
     public function getPartyIds(): array
     {
         return $this->partyIds;
     }
 
+    /**
+     * @param int[] $partyIds
+     */
     public function setPartyIds(array $partyIds): void
     {
         $this->partyIds = $partyIds;

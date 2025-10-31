@@ -1,22 +1,26 @@
 <?php
 
-namespace WechatWorkExternalContactStatsBundle\Tests\Unit\Exception;
+namespace WechatWorkExternalContactStatsBundle\Tests\Exception;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Tourze\PHPUnitBase\AbstractExceptionTestCase;
 use WechatWorkExternalContactStatsBundle\Exception\InvalidParameterException;
 
 /**
  * InvalidParameterException 测试
+ *
+ * @internal
  */
-class InvalidParameterExceptionTest extends TestCase
+#[CoversClass(InvalidParameterException::class)]
+final class InvalidParameterExceptionTest extends AbstractExceptionTestCase
 {
-    public function test_inheritance(): void
+    public function testInheritance(): void
     {
         $exception = new InvalidParameterException('Test message');
         $this->assertInstanceOf(\RuntimeException::class, $exception);
     }
 
-    public function test_message(): void
+    public function testMessage(): void
     {
         $message = 'Invalid parameter provided';
         $exception = new InvalidParameterException($message);

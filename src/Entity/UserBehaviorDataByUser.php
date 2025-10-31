@@ -18,16 +18,22 @@ class UserBehaviorDataByUser implements \Stringable
     use TimestampableAware;
     use BehaviorDataTrait;
 
+    /**
+     * @var int 主键ID
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER, options: ['comment' => 'ID'])]
-    private ?int $id = 0;
+    private int $id = 0;
 
-    #[ORM\ManyToOne]
+    /**
+     * @var UserInterface|null 员工用户
+     */
+    #[ORM\ManyToOne(targetEntity: 'WechatWorkStaffBundle\Entity\User')]
     #[ORM\JoinColumn(nullable: false)]
     private ?UserInterface $user = null;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -37,12 +43,11 @@ class UserBehaviorDataByUser implements \Stringable
         return $this->user;
     }
 
-    public function setUser(?UserInterface $user): static
+    public function setUser(?UserInterface $user): void
     {
         $this->user = $user;
-
-        return $this;
     }
+
     public function __toString(): string
     {
         return (string) $this->getId();

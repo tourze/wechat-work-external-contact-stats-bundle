@@ -5,16 +5,18 @@ namespace WechatWorkExternalContactStatsBundle\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @see https://developer.work.weixin.qq.com/document/path/92132
- */
 trait BehaviorDataTrait
 {
-    #[ORM\Column(type: Types::DATE_MUTABLE, options: ['comment' => '日期'])]
+    /**
+     * @var \DateTimeInterface|null 数据统计日期
+     */
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, options: ['comment' => '日期'])]
     private ?\DateTimeInterface $date = null;
 
     /**
-     * @var int|null 成员通过「搜索手机号」、「扫一扫」、「从微信好友中添加」、「从群聊中添加」、「添加共享、分配给我的客户」、「添加单向、双向删除好友关系的好友」、「从新的联系人推荐中添加」等渠道主动向客户发起的好友申请数量
+     * @var int|null 成员通过「搜索手机号」、「扫一扫」、「从微信好友中添加」、「从群聊中添加」、
+     *               「添加共享、分配给我的客户」、「添加单向、双向删除好友关系的好友」、
+     *               「从新的联系人推荐中添加」等渠道主动向客户发起的好友申请数量
      */
     #[ORM\Column(nullable: true, options: ['comment' => '发起申请数'])]
     private ?int $newApplyCount = null;
@@ -60,11 +62,9 @@ trait BehaviorDataTrait
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDate(?\DateTimeInterface $date): void
     {
         $this->date = $date;
-
-        return $this;
     }
 
     public function getNewApplyCount(): ?int
@@ -72,11 +72,9 @@ trait BehaviorDataTrait
         return $this->newApplyCount;
     }
 
-    public function setNewApplyCount(?int $newApplyCount): static
+    public function setNewApplyCount(?int $newApplyCount): void
     {
         $this->newApplyCount = $newApplyCount;
-
-        return $this;
     }
 
     public function getNewContactCount(): ?int
@@ -84,11 +82,9 @@ trait BehaviorDataTrait
         return $this->newContactCount;
     }
 
-    public function setNewContactCount(?int $newContactCount): static
+    public function setNewContactCount(?int $newContactCount): void
     {
         $this->newContactCount = $newContactCount;
-
-        return $this;
     }
 
     public function getChatCount(): ?int
@@ -96,11 +92,9 @@ trait BehaviorDataTrait
         return $this->chatCount;
     }
 
-    public function setChatCount(?int $chatCount): static
+    public function setChatCount(?int $chatCount): void
     {
         $this->chatCount = $chatCount;
-
-        return $this;
     }
 
     public function getMessageCount(): ?int
@@ -108,11 +102,9 @@ trait BehaviorDataTrait
         return $this->messageCount;
     }
 
-    public function setMessageCount(?int $messageCount): static
+    public function setMessageCount(?int $messageCount): void
     {
         $this->messageCount = $messageCount;
-
-        return $this;
     }
 
     public function getReplyPercentage(): ?float
@@ -120,11 +112,9 @@ trait BehaviorDataTrait
         return $this->replyPercentage;
     }
 
-    public function setReplyPercentage(?float $replyPercentage): static
+    public function setReplyPercentage(?float $replyPercentage): void
     {
         $this->replyPercentage = $replyPercentage;
-
-        return $this;
     }
 
     public function getAvgReplyTime(): ?int
@@ -132,11 +122,9 @@ trait BehaviorDataTrait
         return $this->avgReplyTime;
     }
 
-    public function setAvgReplyTime(?int $avgReplyTime): static
+    public function setAvgReplyTime(?int $avgReplyTime): void
     {
         $this->avgReplyTime = $avgReplyTime;
-
-        return $this;
     }
 
     public function getNegativeFeedbackCount(): ?int
@@ -144,10 +132,8 @@ trait BehaviorDataTrait
         return $this->negativeFeedbackCount;
     }
 
-    public function setNegativeFeedbackCount(?int $negativeFeedbackCount): static
+    public function setNegativeFeedbackCount(?int $negativeFeedbackCount): void
     {
         $this->negativeFeedbackCount = $negativeFeedbackCount;
-
-        return $this;
     }
 }
