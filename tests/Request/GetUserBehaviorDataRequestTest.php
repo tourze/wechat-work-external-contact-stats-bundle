@@ -5,9 +5,8 @@ namespace WechatWorkExternalContactStatsBundle\Tests\Request;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use HttpClientBundle\Request\ApiRequest;
-use HttpClientBundle\Tests\Request\RequestTestCase;
+use HttpClientBundle\Test\RequestTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\WechatWorkContracts\AgentInterface;
 use WechatWorkExternalContactStatsBundle\Request\GetUserBehaviorDataRequest;
 

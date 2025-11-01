@@ -86,8 +86,7 @@ class UserBehaviorDataByPartyCrudControllerTest extends AbstractEasyAdminControl
      */
     public function testIndex(): void
     {
-        $client = self::createClientWithDatabase();
-        $this->loginAsAdmin($client);
+        $client = self::createAuthenticatedClient();
 
         // 使用控制器定义的路径
         $url = '/admin/wechat-work-external-contact-stats/user-behavior-data-by-party';
