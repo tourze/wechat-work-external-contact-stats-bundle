@@ -414,7 +414,7 @@ final class UserBehaviorDataByPartyTest extends AbstractEntityTestCase
      */
     public static function propertiesProvider(): iterable
     {
-        yield 'party' => ['party', null];
+        // party 属性为 DepartmentInterface 类型，避免序列化问题，由专门的测试方法覆盖
         yield 'date' => ['date', new \DateTimeImmutable('2024-01-15')];
         yield 'newApplyCount' => ['newApplyCount', 10];
         yield 'newContactCount' => ['newContactCount', 20];
