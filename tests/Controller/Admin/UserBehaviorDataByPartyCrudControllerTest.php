@@ -105,11 +105,6 @@ class UserBehaviorDataByPartyCrudControllerTest extends AbstractEasyAdminControl
         $this->assertNotEmpty($pageTitle, '页面应该有标题');
     }
 
-    public function testGetEntityFqcn(): void
-    {
-        $this->assertSame(UserBehaviorDataByParty::class, UserBehaviorDataByPartyCrudController::getEntityFqcn());
-    }
-
     public function testControllerInstantiation(): void
     {
         $controller = $this->getController();

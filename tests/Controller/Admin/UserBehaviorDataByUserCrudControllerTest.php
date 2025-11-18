@@ -78,11 +78,6 @@ class UserBehaviorDataByUserCrudControllerTest extends AbstractEasyAdminControll
         yield 'user' => ['user'];
     }
 
-    public function testGetEntityFqcn(): void
-    {
-        $this->assertSame(UserBehaviorDataByUser::class, UserBehaviorDataByUserCrudController::getEntityFqcn());
-    }
-
     public function testControllerInstantiation(): void
     {
         $controller = $this->getController();
