@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 use WechatWorkExternalContactStatsBundle\Controller\Admin\UserBehaviorDataByPartyCrudController;
+use WechatWorkExternalContactStatsBundle\DataFixtures\UserBehaviorDataByPartyFixtures;
 use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByParty;
 
 /**
@@ -32,6 +33,17 @@ class UserBehaviorDataByPartyCrudControllerTest extends AbstractEasyAdminControl
     protected function getControllerService(): UserBehaviorDataByPartyCrudController
     {
         return new UserBehaviorDataByPartyCrudController();
+    }
+
+    /**
+     * 重写基类方法，加载数据库以确保有数据显示
+     */
+    protected function afterEasyAdminSetUp(): void
+    {
+        parent::afterEasyAdminSetUp();
+
+        // 清理并加载所有fixtures，确保index页面有数据显示
+        self::cleanDatabase();
     }
 
     private function getController(): UserBehaviorDataByPartyCrudController

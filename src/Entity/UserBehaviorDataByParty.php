@@ -29,7 +29,7 @@ class UserBehaviorDataByParty implements \Stringable
     /**
      * @var DepartmentInterface|null 部门
      */
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: DepartmentInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?DepartmentInterface $party = null;
 

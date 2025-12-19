@@ -8,12 +8,11 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\PHPUnitSymfonyKernelTest\AbstractRepositoryTestCase;
-use Tourze\WechatWorkContracts\UserInterface;
 use WechatWorkBundle\Entity\Agent;
 use WechatWorkBundle\Entity\Corp;
+use WechatWorkStaffBundle\Entity\User;
 use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByUser;
 use WechatWorkExternalContactStatsBundle\Repository\UserBehaviorDataByUserRepository;
-use WechatWorkStaffBundle\Entity\User;
 
 /**
  * UserBehaviorDataByUserRepository 测试
@@ -151,7 +150,7 @@ final class UserBehaviorDataByUserRepositoryTest extends AbstractRepositoryTestC
         return $this->repository;
     }
 
-    private function createWechatWorkUser(): UserInterface
+    private function createWechatWorkUser(): User
     {
         $uniqueId = uniqid();
 

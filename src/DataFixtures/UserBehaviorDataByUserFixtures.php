@@ -8,8 +8,8 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use WechatWorkBundle\Entity\Agent;
 use WechatWorkBundle\Entity\Corp;
-use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByUser;
 use WechatWorkStaffBundle\Entity\User;
+use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByUser;
 
 final class UserBehaviorDataByUserFixtures extends Fixture
 {

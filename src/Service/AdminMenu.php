@@ -15,7 +15,7 @@ use WechatWorkExternalContactStatsBundle\Controller\Admin\UserBehaviorDataByUser
  * 企业微信外部联系人统计菜单提供者
  */
 #[Autoconfigure(public: true)]
-readonly class AdminMenu implements MenuProviderInterface
+readonly final class AdminMenu implements MenuProviderInterface
 {
     public function __construct(
         private LinkGeneratorInterface $linkGenerator,

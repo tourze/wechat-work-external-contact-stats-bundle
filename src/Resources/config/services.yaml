@@ -3,13 +3,22 @@ services:
   _defaults:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false
 
-  WechatWorkExternalContactStatsBundle\Command\:
-    resource: '../../Command/'
-  WechatWorkExternalContactStatsBundle\Repository\:
-    resource: '../../Repository/'
   WechatWorkExternalContactStatsBundle\Controller\:
     resource: '../../Controller/'
     tags: ['controller.service_arguments']
+
+  WechatWorkExternalContactStatsBundle\Command\:
+    resource: '../../Command/'
+
+  WechatWorkExternalContactStatsBundle\Repository\:
+    resource: '../../Repository/'
+    public: true
+
   WechatWorkExternalContactStatsBundle\Service\:
     resource: '../../Service/'
+    public: true
+
+  # Note: Request and Exception classes should NOT be registered as services
+  # They are simple value objects and should be instantiated directly

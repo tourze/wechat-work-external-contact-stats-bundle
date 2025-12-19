@@ -11,7 +11,7 @@ use WechatWorkExternalContactStatsBundle\Entity\UserBehaviorDataByParty;
  * @extends ServiceEntityRepository<UserBehaviorDataByParty>
  */
 #[AsRepository(entityClass: UserBehaviorDataByParty::class)]
-class UserBehaviorDataByPartyRepository extends ServiceEntityRepository
+final class UserBehaviorDataByPartyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -23,7 +23,7 @@ use WechatWorkExternalContactStatsBundle\Request\GetUserBehaviorDataRequest;
 #[AsCronTask(expression: '14 6 * * *')]
 #[AsCommand(name: self::NAME, description: '获取「联系客户统计」数据-单用户的数据')]
 #[Autoconfigure(public: true)]
-class SyncUserBehaviorByUserCommand extends Command
+final class SyncUserBehaviorByUserCommand extends Command
 {
     public const NAME = 'wechat-work:sync-user-behavior-by-user';
 

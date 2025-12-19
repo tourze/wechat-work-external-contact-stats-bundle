@@ -24,8 +24,9 @@ final class SyncUserBehaviorByUserCommandTest extends AbstractCommandTestCase
 
     protected function getCommandTester(): CommandTester
     {
-        // 由于外部依赖问题，创建一个Mock Command来满足测试要求
-        $command = $this->createMock(SyncUserBehaviorByUserCommand::class);
+        // 从容器获取真实的 Command 实例，包含所有依赖
+        /** @var SyncUserBehaviorByUserCommand $command */
+        $command = self::getService(SyncUserBehaviorByUserCommand::class);
 
         return new CommandTester($command);
     }

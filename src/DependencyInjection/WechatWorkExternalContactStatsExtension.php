@@ -4,7 +4,7 @@ namespace WechatWorkExternalContactStatsBundle\DependencyInjection;
 
 use Tourze\SymfonyDependencyServiceLoader\AutoExtension;
 
-class WechatWorkExternalContactStatsExtension extends AutoExtension
+final class WechatWorkExternalContactStatsExtension extends AutoExtension
 {
     protected function getConfigDir(): string
     {

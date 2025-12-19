@@ -12,7 +12,7 @@ use WechatWorkExternalContactStatsBundle\Exception\InvalidParameterException;
  *
  * @see https://developer.work.weixin.qq.com/document/path/92132
  */
-class GetUserBehaviorDataRequest extends ApiRequest
+final class GetUserBehaviorDataRequest extends ApiRequest
 {
     use AgentAware;
 

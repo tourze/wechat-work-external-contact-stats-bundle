@@ -29,7 +29,7 @@ class UserBehaviorDataByUser implements \Stringable
     /**
      * @var UserInterface|null 员工用户
      */
-    #[ORM\ManyToOne(targetEntity: 'WechatWorkStaffBundle\Entity\User')]
+    #[ORM\ManyToOne(targetEntity: UserInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?UserInterface $user = null;
 

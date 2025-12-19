@@ -16,13 +16,16 @@ use WechatWorkExternalContactStatsBundle\Entity\BehaviorDataTrait;
 #[CoversClass(BehaviorDataTrait::class)]
 final class BehaviorDataTraitTest extends TestCase
 {
-    private TestableTraitUser $traitObject;
+    private object $traitObject;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->traitObject = new TestableTraitUser();
+        // 创建一个匿名类来测试 BehaviorDataTrait
+        $this->traitObject = new class {
+            use BehaviorDataTrait;
+        };
     }
 
     public function testSetDateWithValidDateSetsDateCorrectly(): void
